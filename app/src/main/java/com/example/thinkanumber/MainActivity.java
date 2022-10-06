@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private int tipp;
     private int gondolt;
     private Random rng;
+    private int elet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +61,35 @@ public class MainActivity extends AppCompatActivity {
         tippButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+                if(gondolt == tipp){
+
+                }else if(tipp<gondolt){
+                    minusElet();
+                    Toast.makeText(MainActivity.this, "A gondolt szám nagyobb", Toast.LENGTH_SHORT).show();
+                }else if(tipp>gondolt){
+                    minusElet();
+                    Toast.makeText(MainActivity.this, "A gondolt szám kisebb", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+    }
 
+    private void minusElet(){
+        elet--;
+        switch (elet){
+            case 3:
+                pic4.setImageResource(R.drawable.heart1);
+                break;
+            case 2:
+                pic3.setImageResource(R.drawable.heart1);
+                break;
+            case 1:
+                pic2.setImageResource(R.drawable.heart1);
+                break;
+            case 0:
+                pic1.setImageResource(R.drawable.heart1);
+                break;
+        }
     }
 
     private void init(){
@@ -77,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
         rng = new Random();
         tipp = 1;
         gondolt = rng.nextInt(10)+1;
+        elet=4;
         Log.d("gondolt",String.valueOf(gondolt));
     }
 }
